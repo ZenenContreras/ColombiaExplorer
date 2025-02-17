@@ -66,14 +66,6 @@ const NavigationBar = ({
             <Button
               variant="ghost"
               className="flex items-center gap-2 hover:bg-blue-50"
-              onClick={() => onFilterChange("cities")}
-            >
-              <Building2 className="h-4 w-4" />
-              Ciudades
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2 hover:bg-blue-50"
               onClick={() => onFilterChange("cultural")}
             >
               <Landmark className="h-4 w-4" />

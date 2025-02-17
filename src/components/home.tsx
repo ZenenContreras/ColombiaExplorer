@@ -43,7 +43,8 @@ const defaultLocations: Location[] = [
     id: "2",
     title: "Parque Tayrona",
     description: "Playas vírgenes y biodiversidad única en el Caribe.",
-    image: "https://images.unsplash.com/photo-1598881034666-a8796f3797fd",
+    image:
+      "https://lh3.googleusercontent.com/p/AF1QipP5imWkgYXdGoz9nME1PU-wXdoxkqBylLTFh2Ko=s680-w680-h510",
     coordinates: { x: 70, y: 20 },
     type: "beaches",
     address: "Santa Marta, Magdalena",
@@ -326,7 +327,7 @@ const Home = () => {
           <h2 className="text-3xl font-bold text-center mb-12">
             Explora por Categoría
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {[
               {
                 icon: MapPin,
@@ -339,12 +340,6 @@ const Home = () => {
                 title: "Montañas",
                 count: "12+ destinos",
                 color: "bg-green-500",
-              },
-              {
-                icon: Building2,
-                title: "Ciudades",
-                count: "8+ destinos",
-                color: "bg-yellow-500",
               },
               {
                 icon: Landmark,
