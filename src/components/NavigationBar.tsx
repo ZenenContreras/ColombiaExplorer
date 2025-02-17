@@ -102,7 +102,7 @@ const NavigationBar = ({
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-yellow-500 via-red-500 to-blue-600 text-transparent bg-clip-text hover:opacity-80 transition-opacity">
+                <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-yellow-500 via-red-500 to-blue-600 text-transparent bg-clip-text hover:opacity-80 transition-opacity pr-8">
                   Colombia Explorer
                 </span>
                 <span className="text-[10px] sm:text-xs text-gray-500 -mt-0.5 hidden md:block">
@@ -115,7 +115,7 @@ const NavigationBar = ({
           <div className="hidden lg:flex items-center space-x-6">
             <Button
               variant="ghost"
-              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2 transition-all duration-300 hover:scale-105"
+              className="flex items-center gap-3 hover:bg-blue-50 px-3 py-2 transition-all duration-300 hover:scale-105"
               onClick={() => handleFilterClick("beaches")}
             >
               <MapPin className="h-4 w-4" />
