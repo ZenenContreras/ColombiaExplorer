@@ -9,6 +9,7 @@ import {
   Leaf,
 } from "lucide-react";
 import InteractiveMap from "./InteractiveMap";
+import NavigationBar from "./NavigationBar";
 
 interface Location {
   id: string;
@@ -189,7 +190,7 @@ const Home = () => {
   };
 
   const handleFilterChange = (filter: string) => {
-    setSelectedType(filter);
+    setSelectedType(filter === selectedType ? undefined : filter);
   };
 
   const filteredLocations = defaultLocations.filter((location) => {
@@ -202,6 +203,11 @@ const Home = () => {
 
   return (
     <div className="flex-1">
+      <NavigationBar 
+        onSearch={handleSearch}
+        onFilterChange={handleFilterChange}
+      />
+      
       <div className="h-[600px] relative">
         <InteractiveMap
           locations={filteredLocations}
