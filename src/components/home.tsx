@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
   Mountain,
@@ -7,9 +8,11 @@ import {
   TreePine,
   Users,
   Leaf,
+  ArrowRight
 } from "lucide-react";
 import InteractiveMap from "./InteractiveMap";
 import NavigationBar from "./NavigationBar";
+import { Button } from "./ui/button";
 
 interface Location {
   id: string;
@@ -184,6 +187,11 @@ const defaultLocations: Location[] = [
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState<string | undefined>();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -202,207 +210,279 @@ const Home = () => {
   });
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 overflow-hidden">
       <NavigationBar 
         onSearch={handleSearch}
         onFilterChange={handleFilterChange}
       />
       
-      <div className="h-[600px] relative">
-        <InteractiveMap
-          locations={filteredLocations}
-          selectedType={selectedType}
-        />
+      {/* Hero Section con Parallax */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="relative h-screen"
+      >
+        <div className="absolute inset-0 bg-[url('/public/colombia-hero.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="relative container mx-auto px-4 h-full flex items-center"
+        >
+          <div className="max-w-2xl text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Descubre la Magia de
+              <span className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-transparent bg-clip-text">
+                {" "}Colombia
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-200">
+              Explora destinos únicos y vive experiencias inolvidables
+            </p>
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-white hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
+                onClick={() => document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Comenzar Aventura
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Mapa Interactivo */}
+      <div 
+        id="map-section" 
+        className="relative min-h-[800px] bg-gray-50 py-16"
+      >
+        <div className="container mx-auto px-4 h-full">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="h-[700px] rounded-xl overflow-hidden"
+          >
+            <InteractiveMap
+              locations={filteredLocations}
+              selectedType={selectedType}
+            />
+          </motion.div>
+        </div>
       </div>
 
-      {/* Featured Destinations */}
-      <section className="bg-white py-16">
+      {/* Destinos Destacados */}
+      <section className="bg-white py-16 overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-yellow-500 via-red-500 to-blue-600 text-transparent bg-clip-text">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-yellow-500 via-red-500 to-blue-600 text-transparent bg-clip-text"
+          >
             Destinos Destacados
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {defaultLocations.slice(0, 3).map((location) => (
-              <div key={location.id} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-lg shadow-lg">
-                  <img
+            {defaultLocations.slice(0, 3).map((location, index) => (
+              <motion.div
+                key={location.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className="group cursor-pointer"
+              >
+                <div className="relative overflow-hidden rounded-xl shadow-lg">
+                  <motion.img
                     src={location.image}
                     alt={location.title}
-                    className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-64 object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
-                    <div className="absolute bottom-0 p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 p-6 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
                       <h3 className="text-xl font-bold text-white mb-2">
                         {location.title}
                       </h3>
-                      <p className="text-white/80 text-sm">
+                      <p className="text-white/90 text-sm">
                         {location.description}
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Eco-Tourism Section */}
-      <section className="bg-gradient-to-br from-green-50 to-green-100 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Ecoturismo en Colombia
-          </h2>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-            Descubre destinos únicos mientras contribuyes a la conservación del
-            medio ambiente y apoyas a las comunidades locales.
-          </p>
+      {/* Sección de Ecoturismo con Parallax */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/public/eco-bg.jpg')] bg-cover bg-fixed bg-center" />
+        <div className="absolute inset-0 bg-green-900/80 backdrop-blur-sm" />
+        <div className="relative container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Ecoturismo en Colombia
+            </h2>
+            <p className="text-xl text-green-50 max-w-2xl mx-auto">
+              Descubre destinos únicos mientras contribuyes a la conservación
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                <TreePine className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Conservación</h3>
-              <p className="text-gray-600">
-                Nuestros tours están diseñados para minimizar el impacto
-                ambiental y proteger los ecosistemas locales.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">
-                Comunidades Locales
-              </h3>
-              <p className="text-gray-600">
-                Trabajamos directamente con comunidades locales para preservar
-                su cultura y tradiciones.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                <Leaf className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Turismo Sostenible</h3>
-              <p className="text-gray-600">
-                Promovemos prácticas sostenibles y educación ambiental en todos
-                nuestros destinos.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg p-8 shadow-lg">
-            <h3 className="text-2xl font-bold mb-4 text-center">
-              Nuestro Compromiso Ambiental
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-green-700">
-                  Iniciativas de Conservación
-                </h4>
-                <ul className="list-disc list-inside text-gray-600 space-y-2">
-                  <li>Programas de reforestación en destinos turísticos</li>
-                  <li>Protección de especies en peligro de extinción</li>
-                  <li>Manejo responsable de residuos</li>
-                  <li>Educación ambiental para visitantes</li>
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-green-700">
-                  Impacto Social
-                </h4>
-                <ul className="list-disc list-inside text-gray-600 space-y-2">
-                  <li>Apoyo a proyectos comunitarios locales</li>
-                  <li>Preservación de tradiciones culturales</li>
-                  <li>Generación de empleo local</li>
-                  <li>Comercio justo con artesanos</li>
-                </ul>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: TreePine,
+                title: "Conservación",
+                description: "Protegemos los ecosistemas locales"
+              },
+              {
+                icon: Users,
+                title: "Comunidades Locales",
+                description: "Apoyamos el desarrollo sostenible"
+              },
+              {
+                icon: Leaf,
+                title: "Turismo Sostenible",
+                description: "Promovemos prácticas responsables"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className="bg-white/10 backdrop-blur-md rounded-xl p-6 hover:bg-white/20 transition-colors duration-300"
+              >
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <item.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-4 text-center">
+                  {item.title}
+                </h3>
+                <p className="text-green-50 text-center">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Tourism Categories */}
-      <section className="bg-gray-50 py-16">
+      {/* Categorías con Hover Effects */}
+      <section className="bg-gray-50 py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-center mb-16"
+          >
             Explora por Categoría
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 icon: MapPin,
                 title: "Playas",
                 count: "15+ destinos",
-                color: "bg-blue-500",
+                color: "from-blue-400 to-blue-600",
               },
               {
                 icon: Mountain,
                 title: "Montañas",
                 count: "12+ destinos",
-                color: "bg-green-500",
+                color: "from-green-400 to-green-600",
               },
               {
                 icon: Landmark,
                 title: "Sitios Culturales",
                 count: "20+ destinos",
-                color: "bg-red-500",
+                color: "from-red-400 to-red-600",
               },
             ].map((category, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                className="relative group"
               >
-                <div
-                  className={`w-12 h-12 ${category.color} rounded-lg flex items-center justify-center mb-4`}
-                >
-                  <category.icon className="w-6 h-6 text-white" />
+                <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <category.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-yellow-500 group-hover:to-red-500 transition-all duration-300">
+                    {category.title}
+                  </h3>
+                  <p className="text-gray-600">{category.count}</p>
                 </div>
-                <h3 className="font-semibold text-lg mb-1">{category.title}</h3>
-                <p className="text-gray-600 text-sm">{category.count}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Travel Tips */}
-      <section className="bg-white py-16">
+      {/* Tips de Viaje con Animaciones */}
+      <section className="bg-white py-20 overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-center mb-16"
+          >
             Tips para Viajeros
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">
-                Mejor Época para Viajar
-              </h3>
-              <p className="text-gray-700">
-                La temporada seca (diciembre a marzo) es ideal para visitar la
-                mayoría de los destinos en Colombia.
-              </p>
-            </div>
-            <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Transporte</h3>
-              <p className="text-gray-700">
-                Colombia cuenta con una extensa red de transporte que incluye
-                vuelos domésticos y buses intermunicipales.
-              </p>
-            </div>
-            <div className="p-6 bg-gradient-to-br from-red-50 to-red-100 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">
-                Cultura y Costumbres
-              </h3>
-              <p className="text-gray-700">
-                Los colombianos son conocidos por su hospitalidad. El español es
-                el idioma principal.
-              </p>
-            </div>
+            {[
+              {
+                title: "Mejor Época",
+                description: "Temporada seca (diciembre a marzo)",
+                gradient: "from-yellow-50 to-yellow-100",
+              },
+              {
+                title: "Transporte",
+                description: "Vuelos domésticos y buses intermunicipales",
+                gradient: "from-blue-50 to-blue-100",
+              },
+              {
+                title: "Cultura",
+                description: "Hospitalidad colombiana y español",
+                gradient: "from-red-50 to-red-100",
+              },
+            ].map((tip, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ scale: 1.03 }}
+                className={`p-8 bg-gradient-to-br ${tip.gradient} rounded-xl shadow-lg hover:shadow-xl transition-all duration-300`}
+              >
+                <h3 className="text-xl font-semibold mb-4">{tip.title}</h3>
+                <p className="text-gray-700">{tip.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
