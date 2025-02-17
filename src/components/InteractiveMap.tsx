@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 import L from 'leaflet';
@@ -78,14 +78,14 @@ const InteractiveMap = ({
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<{ [key: string]: L.Marker }>({});
 
-  const filteredLocations = selectedType
-    ? locations.filter((location) => location.type === selectedType)
-    : locations;
+  const filteredLocations = useMemo(() => 
+    selectedType ? locations.filter(loc => loc.type === selectedType) : locations,
+    [locations, selectedType]
+  );
 
-  const handleLocationClick = (location: Location) => {
-    setSelectedLocation(location);
+  const handleMarkerClick = useCallback((location: Location) => {
     onLocationSelect(location);
-  };
+  }, [onLocationSelect]);
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -138,7 +138,7 @@ const InteractiveMap = ({
         icon: customIcon,
       })
         .addTo(mapRef.current!)
-        .on('click', () => handleLocationClick(location))
+        .on('click', () => handleMarkerClick(location))
         .on('mouseover', () => setHoveredLocation(location))
         .on('mouseout', () => setHoveredLocation(null));
 
@@ -169,11 +169,11 @@ const InteractiveMap = ({
   };
 
   return (
-    <div className="relative w-full h-[600px] bg-white rounded-xl shadow-xl overflow-hidden">
+    <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] bg-white rounded-xl shadow-xl overflow-hidden">
       <div id="map" className="absolute inset-0 z-10" />
       
-      {/* Leyenda actualizada */}
-      <div className="absolute top-4 left-4 z-20 bg-white/90 p-4 rounded-lg shadow-lg backdrop-blur-sm">
+      {/* Leyenda responsive */}
+      <div className="absolute top-4 left-4 z-20 bg-white/90 p-2 sm:p-4 rounded-lg shadow-lg backdrop-blur-sm text-sm sm:text-base">
         <h3 className="text-xl font-bold mb-2">Destinos en Colombia</h3>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">

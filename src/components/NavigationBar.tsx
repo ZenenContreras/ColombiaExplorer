@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -27,6 +27,7 @@ const NavigationBar = ({
   const [searchResults, setSearchResults] = React.useState<typeof defaultLocations>([]);
   const searchRef = React.useRef<HTMLDivElement>(null);
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [showMobileSearch, setShowMobileSearch] = React.useState(false);
 
   // Cerrar la previsualización cuando se hace clic fuera
   React.useEffect(() => {
@@ -78,10 +79,17 @@ const NavigationBar = ({
     }, 500);
   };
 
+  // Optimización de rendimiento con useMemo
+  const memoizedMenuItems = useMemo(() => [
+    { icon: <MapPin className="h-4 w-4" />, label: "Playas", action: () => handleFilterClick("beaches") },
+    { icon: <Mountain className="h-4 w-4" />, label: "Montañas", action: () => handleFilterClick("mountains") },
+    { icon: <Landmark className="h-4 w-4" />, label: "Sitios Culturales", action: () => handleFilterClick("cultural") },
+  ], []);
+
   return (
     <nav className="w-full bg-white border-b border-gray-200 shadow-sm fixed top-0 z-50">
-      <div className="container mx-auto px-2 sm:px-4">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+      <div className="container mx-auto px-2 sm:px-4 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           <div className="flex items-center">
             <div
               className="flex items-center gap-1.5 sm:gap-2 cursor-pointer"
@@ -131,46 +139,23 @@ const NavigationBar = ({
             </Button>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4">
-            <div className="relative" ref={searchRef}>
+          <div className="flex-1 flex justify-end items-center gap-2 sm:gap-4">
+            <div className="relative hidden sm:block">
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
-                className="pl-8 w-36 sm:w-48 md:w-64 transition-all focus:w-48 sm:focus:w-64 md:focus:w-80 text-sm"
+                className="pl-8 w-full max-w-[200px] md:max-w-[300px] lg:max-w-[400px] transition-all"
                 placeholder="Buscar destinos..."
                 value={searchValue}
                 onChange={handleSearchChange}
-                onFocus={() => setShowPreview(searchValue.length > 0)}
               />
-              
-              {showPreview && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 max-h-[calc(100vh-180px)] overflow-y-auto z-50">
-                  <div className="p-2">
-                    <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-2 px-2">Destinos Sugeridos</h3>
-                    <div className="space-y-1">
-                      {searchResults.map(location => (
-                        <div 
-                          key={location.id}
-                          className="flex items-center gap-2 sm:gap-3 p-2 hover:bg-gray-50 rounded-md cursor-pointer active:bg-gray-100"
-                          onClick={() => {
-                            window.location.href = `/destination/${location.id}`;
-                          }}
-                        >
-                          <img 
-                            src={location.image} 
-                            alt={location.title}
-                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-md object-cover"
-                          />
-                          <div>
-                            <h4 className="font-medium text-xs sm:text-sm">{location.title}</h4>
-                            <p className="text-[10px] sm:text-xs text-gray-500">{location.type}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
+            <Button
+              variant="ghost"
+              className="sm:hidden"
+              onClick={() => setShowMobileSearch(!showMobileSearch)}
+            >
+              <Search className="h-5 w-5" />
+            </Button>
 
             <div className="hidden md:flex items-center gap-2 sm:gap-4">
               <Button
