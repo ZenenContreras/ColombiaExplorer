@@ -255,6 +255,19 @@ const Home = () => {
   const [isMapVisible, setIsMapVisible] = useState(false);
 
   useEffect(() => {
+    // Verificar si hay un filtro pendiente
+    const pendingFilter = sessionStorage.getItem('pendingFilter');
+    if (pendingFilter) {
+      setSelectedType(pendingFilter);
+      sessionStorage.removeItem('pendingFilter');
+      document.getElementById('map-section')?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     // Verificar si el mapa está en el viewport
     const observer = new IntersectionObserver(
       (entries) => {

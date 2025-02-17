@@ -59,13 +59,20 @@ const NavigationBar = ({
   };
 
   const handleFilterClick = (filter: string) => {
-    // Scroll suave hacia el mapa
+    // Verificar si estamos en la página principal
+    if (window.location.pathname !== '/') {
+      // Si no estamos en la página principal, redirigir y guardar el filtro
+      sessionStorage.setItem('pendingFilter', filter);
+      window.location.href = '/#map-section';
+      return;
+    }
+
+    // Si estamos en la página principal, aplicar el filtro directamente
     document.getElementById('map-section')?.scrollIntoView({ 
       behavior: 'smooth',
       block: 'center'
     });
     
-    // Aplicar el filtro después de un pequeño delay para que coincida con el scroll
     setTimeout(() => {
       onFilterChange(filter);
     }, 500);
