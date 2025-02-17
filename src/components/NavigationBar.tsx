@@ -58,6 +58,19 @@ const NavigationBar = ({
     }
   };
 
+  const handleFilterClick = (filter: string) => {
+    // Scroll suave hacia el mapa
+    document.getElementById('map-section')?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'center'
+    });
+    
+    // Aplicar el filtro después de un pequeño delay para que coincida con el scroll
+    setTimeout(() => {
+      onFilterChange(filter);
+    }, 500);
+  };
+
   return (
     <nav className="w-full bg-white border-b border-gray-200 shadow-sm fixed top-0 z-50">
       <div className="container mx-auto px-2 sm:px-4">
@@ -87,24 +100,24 @@ const NavigationBar = ({
           <div className="hidden lg:flex items-center space-x-6">
             <Button
               variant="ghost"
-              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2"
-              onClick={() => onFilterChange("beaches")}
+              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2 transition-all duration-300 hover:scale-105"
+              onClick={() => handleFilterClick("beaches")}
             >
               <MapPin className="h-4 w-4" />
               Playas
             </Button>
             <Button
               variant="ghost"
-              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2"
-              onClick={() => onFilterChange("mountains")}
+              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2 transition-all duration-300 hover:scale-105"
+              onClick={() => handleFilterClick("mountains")}
             >
               <Mountain className="h-4 w-4" />
               Montañas
             </Button>
             <Button
               variant="ghost"
-              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2"
-              onClick={() => onFilterChange("cultural")}
+              className="flex items-center gap-2 hover:bg-blue-50 px-3 py-2 transition-all duration-300 hover:scale-105"
+              onClick={() => handleFilterClick("cultural")}
             >
               <Landmark className="h-4 w-4" />
               Sitios Culturales
@@ -184,16 +197,16 @@ const NavigationBar = ({
         {showMobileMenu && (
           <div className="lg:hidden py-2 space-y-1 border-t border-gray-100">
             {[
-              { icon: <MapPin className="h-4 w-4" />, label: "Playas", action: () => onFilterChange("beaches") },
-              { icon: <Mountain className="h-4 w-4" />, label: "Montañas", action: () => onFilterChange("mountains") },
-              { icon: <Landmark className="h-4 w-4" />, label: "Sitios Culturales", action: () => onFilterChange("cultural") },
+              { icon: <MapPin className="h-4 w-4" />, label: "Playas", action: () => handleFilterClick("beaches") },
+              { icon: <Mountain className="h-4 w-4" />, label: "Montañas", action: () => handleFilterClick("mountains") },
+              { icon: <Landmark className="h-4 w-4" />, label: "Sitios Culturales", action: () => handleFilterClick("cultural") },
               { icon: <Info className="h-4 w-4" />, label: "Sobre Nosotros", action: () => window.location.href = "/about" },
               { icon: <Heart className="h-4 w-4" />, label: "Favoritos", action: () => window.location.href = "/favorites" }
             ].map((item, index) => (
               <Button
                 key={index}
                 variant="ghost"
-                className="w-full flex items-center gap-3 justify-start px-4 py-2.5 hover:bg-gray-50 active:bg-gray-100"
+                className="w-full flex items-center gap-3 justify-start px-4 py-2.5 hover:bg-gray-50 active:bg-gray-100 transition-all duration-300"
                 onClick={item.action}
               >
                 {item.icon}

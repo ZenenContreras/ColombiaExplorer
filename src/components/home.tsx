@@ -252,15 +252,32 @@ const defaultLocations: Location[] = [
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState<string | undefined>();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isMapVisible, setIsMapVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    // Verificar si el mapa está en el viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsMapVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
-  };
+    const mapSection = document.getElementById('map-section');
+    if (mapSection) {
+      observer.observe(mapSection);
+    }
+
+    return () => {
+      if (mapSection) {
+        observer.unobserve(mapSection);
+      }
+    };
+  }, []);
 
   const handleFilterChange = (filter: string) => {
     setSelectedType(filter === selectedType ? undefined : filter);
@@ -277,7 +294,7 @@ const Home = () => {
   return (
     <div className="flex-1 overflow-hidden">
       <NavigationBar 
-        onSearch={handleSearch}
+        onSearch={setSearchTerm}
         onFilterChange={handleFilterChange}
       />
       
@@ -322,26 +339,56 @@ const Home = () => {
         </motion.div>
       </motion.div>
 
-      {/* Mapa Interactivo */}
-      <div 
+      {/* Mapa Interactivo con Animaciones */}
+      <motion.div 
         id="map-section" 
         className="relative min-h-[800px] bg-gray-50 py-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isMapVisible ? 1 : 0 }}
+        transition={{ duration: 0.8 }}
       >
         <div className="container mx-auto px-4 h-full">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="h-[700px] rounded-xl overflow-hidden"
-          >
-            <InteractiveMap
-              locations={filteredLocations}
-              selectedType={selectedType}
-            />
-          </motion.div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedType || 'all'} // Cambia la key cuando cambia el filtro
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
+              className="h-[700px] rounded-xl overflow-hidden shadow-2xl"
+            >
+              <InteractiveMap
+                locations={filteredLocations}
+                selectedType={selectedType}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Indicador de filtro activo */}
+          <AnimatePresence>
+            {selectedType && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                className="mt-4 text-center"
+              >
+                <span className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-600">
+                  Mostrando: {selectedType === 'beaches' ? 'Playas' : 
+                             selectedType === 'mountains' ? 'Montañas' : 
+                             'Sitios Culturales'}
+                  <button 
+                    onClick={() => setSelectedType(undefined)}
+                    className="ml-2 hover:text-blue-800"
+                  >
+                    ×
+                  </button>
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
 
       {/* Destinos Destacados */}
       <section className="bg-white py-16 overflow-hidden">
