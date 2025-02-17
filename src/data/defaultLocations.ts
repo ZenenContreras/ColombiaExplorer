@@ -1,102 +1,94 @@
 export interface Location {
   id: string;
   title: string;
-  type: string;
-  tags: string[];
+  description: string;
   image: string;
   coordinates: {
     lat: number;
     lng: number;
   };
+  type: string;
+  address: string;
+  tags: string[];
 }
 
 export const defaultLocations: Location[] = [
   {
     id: "cartagena",
     title: "Cartagena",
-    type: "Ciudad Histórica",
-    tags: ["playas", "cultural", "colonial"],
+    description: "Ciudad histórica con arquitectura colonial",
     image: "/images/cartagena.jpg",
     coordinates: {
       lat: 10.3932,
       lng: -75.4832
-    }
+    },
+    type: "cultural",
+    address: "Cartagena, Bolívar",
+    tags: ["Cultural", "Playas", "Historia"]
   },
   {
     id: "tayrona",
     title: "Parque Tayrona",
-    type: "Parque Nacional",
-    tags: ["playas", "naturaleza", "ecoturismo"],
+    description: "Parque nacional con playas vírgenes",
     image: "/images/tayrona.jpg",
     coordinates: {
       lat: 11.3147,
       lng: -74.0307
-    }
+    },
+    type: "beaches",
+    address: "Santa Marta, Magdalena",
+    tags: ["Playas", "Naturaleza", "Ecoturismo"]
   },
   {
     id: "cocora",
     title: "Valle del Cocora",
-    type: "Valle",
-    tags: ["montañas", "naturaleza", "senderismo"],
+    description: "Valle con las palmeras de cera más altas del mundo",
     image: "/images/cocora.jpg",
     coordinates: {
       lat: 4.6381,
       lng: -75.4870
-    }
-  },
-  {
-    id: "guatape",
-    title: "Guatapé",
-    type: "Pueblo Colorido",
-    tags: ["cultural", "lagos", "arquitectura"],
-    image: "/images/guatape.jpg",
-    coordinates: {
-      lat: 6.2342,
-      lng: -75.1574
-    }
+    },
+    type: "mountains",
+    address: "Salento, Quindío",
+    tags: ["Montañas", "Naturaleza"]
   },
   {
     id: "sanandres",
     title: "San Andrés",
-    type: "Isla",
-    tags: ["playas", "mar", "caribe"],
+    description: "Isla paradisíaca en el Caribe",
     image: "/images/sanandres.jpg",
     coordinates: {
       lat: 12.5847,
       lng: -81.7006
-    }
+    },
+    type: "beaches",
+    address: "San Andrés Isla",
+    tags: ["Playas", "Isla"]
   },
   {
-    id: "bogota",
-    title: "Bogotá",
-    type: "Ciudad Capital",
-    tags: ["cultural", "museos", "gastronomía"],
-    image: "/images/bogota.jpg",
+    id: "guatape",
+    title: "Guatapé",
+    description: "Pueblo colorido con el Peñol",
+    image: "/images/guatape.jpg",
     coordinates: {
-      lat: 4.7110,
-      lng: -74.0721
-    }
+      lat: 6.2342,
+      lng: -75.1574
+    },
+    type: "cultural",
+    address: "Guatapé, Antioquia",
+    tags: ["Cultural", "Naturaleza"]
   },
   {
-    id: "medellin",
-    title: "Medellín",
-    type: "Ciudad Innovadora",
-    tags: ["cultural", "moderno", "primavera"],
-    image: "/images/medellin.jpg",
+    id: "amazonas",
+    title: "Amazonas",
+    description: "Selva amazónica colombiana",
+    image: "/images/amazonas.jpg",
     coordinates: {
-      lat: 6.2442,
-      lng: -75.5812
-    }
-  },
-  {
-    id: "cali",
-    title: "Cali",
-    type: "Capital de la Salsa",
-    tags: ["cultural", "baile", "gastronomía"],
-    image: "/images/cali.jpg",
-    coordinates: {
-      lat: 3.4516,
-      lng: -76.5320
-    }
+      lat: -4.2,
+      lng: -69.9513
+    },
+    type: "ecotourism",
+    address: "Leticia, Amazonas",
+    tags: ["Naturaleza", "Ecoturismo"]
   }
 ]; 

@@ -19,7 +19,7 @@ interface Location {
   title: string;
   description: string;
   image: string;
-  coordinates: { x: number; y: number };
+  coordinates: { lat: number; lng: number };
   type: string;
   address: string;
   hours: string;
@@ -35,7 +35,7 @@ const defaultLocations: Location[] = [
     title: "Playa Blanca",
     description: "Una de las playas más hermosas del Caribe colombiano.",
     image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f",
-    coordinates: { x: 25, y: 35 },
+    coordinates: { lat: 10.2544, lng: -75.6053 },
     type: "beaches",
     address: "Cartagena, Bolívar",
     hours: "24/7",
@@ -49,7 +49,7 @@ const defaultLocations: Location[] = [
     description: "Playas vírgenes y biodiversidad única en el Caribe.",
     image:
       "https://lh3.googleusercontent.com/p/AF1QipP5imWkgYXdGoz9nME1PU-wXdoxkqBylLTFh2Ko=s680-w680-h510",
-    coordinates: { x: 70, y: 20 },
+    coordinates: { lat: 11.3147, lng: -74.0307 },
     type: "beaches",
     address: "Santa Marta, Magdalena",
     hours: "6:00 AM - 5:00 PM",
@@ -63,7 +63,7 @@ const defaultLocations: Location[] = [
     description:
       "Isla paradisíaca con playas de arena blanca y aguas cristalinas.",
     image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f",
-    coordinates: { x: 15, y: 15 },
+    coordinates: { lat: 12.5847, lng: -81.7006 },
     type: "beaches",
     address: "San Andrés Isla",
     hours: "24/7",
@@ -78,7 +78,7 @@ const defaultLocations: Location[] = [
     title: "Valle del Cocora",
     description: "Hogar de la palma de cera y senderos ecológicos.",
     image: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849",
-    coordinates: { x: 35, y: 45 },
+    coordinates: { lat: 4.6389, lng: -75.4889 },
     type: "mountains",
     address: "Salento, Quindío",
     hours: "6:00 AM - 6:00 PM",
@@ -91,7 +91,7 @@ const defaultLocations: Location[] = [
     title: "PNN Los Nevados",
     description: "Parque Nacional con glaciares y ecosistemas únicos.",
     image: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849",
-    coordinates: { x: 40, y: 42 },
+    coordinates: { lat: 4.8828, lng: -75.3333 },
     type: "mountains",
     address: "Manizales, Caldas",
     hours: "5:00 AM - 4:00 PM",
@@ -104,7 +104,7 @@ const defaultLocations: Location[] = [
     title: "Monserrate",
     description: "Montaña emblemática que domina el centro de Bogotá.",
     image: "https://images.unsplash.com/photo-1597006438013-0f0cca2c1a03",
-    coordinates: { x: 45, y: 60 },
+    coordinates: { lat: 4.6058, lng: -74.0556 },
     type: "mountains",
     address: "Bogotá, Colombia",
     hours: "7:00 AM - 11:00 PM",
@@ -119,7 +119,7 @@ const defaultLocations: Location[] = [
     title: "Ciudad Perdida",
     description: "Antigua ciudad indígena en la Sierra Nevada.",
     image: "https://images.unsplash.com/photo-1569242840510-5c8a3b53b719",
-    coordinates: { x: 65, y: 25 },
+    coordinates: { lat: 11.0384, lng: -73.9267 },
     type: "cultural",
     address: "Sierra Nevada, Santa Marta",
     hours: "8:00 AM - 5:00 PM",
@@ -132,7 +132,7 @@ const defaultLocations: Location[] = [
     title: "San Agustín",
     description: "Parque Arqueológico con estatuas precolombinas.",
     image: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849",
-    coordinates: { x: 30, y: 55 },
+    coordinates: { lat: 1.8879, lng: -76.2756 },
     type: "cultural",
     address: "San Agustín, Huila",
     hours: "8:00 AM - 4:00 PM",
@@ -146,7 +146,7 @@ const defaultLocations: Location[] = [
     description:
       "Patrimonio de la Humanidad UNESCO con arquitectura colonial colorida y calles empedradas.",
     image: "https://images.unsplash.com/photo-1583997052103-b4a1cb974ce3",
-    coordinates: { x: 30, y: 40 },
+    coordinates: { lat: 10.3932, lng: -75.4832 },
     type: "cultural",
     address: "Centro Histórico, Cartagena",
     hours: "24/7",
@@ -161,7 +161,7 @@ const defaultLocations: Location[] = [
     title: "Amazonas",
     description: "Selva amazónica y comunidades indígenas.",
     image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f",
-    coordinates: { x: 80, y: 80 },
+    coordinates: { lat: -4.2186, lng: -69.9312 },
     type: "ecotourism",
     address: "Leticia, Amazonas",
     hours: "Tours programados",
@@ -174,7 +174,7 @@ const defaultLocations: Location[] = [
     title: "Guajira Desert",
     description: "Desierto, playas vírgenes y cultura Wayúu.",
     image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f",
-    coordinates: { x: 85, y: 15 },
+    coordinates: { lat: 12.2188, lng: -71.9987 },
     type: "ecotourism",
     address: "Cabo de la Vela, La Guajira",
     hours: "Tours programados",
@@ -182,6 +182,69 @@ const defaultLocations: Location[] = [
     website: "https://laguajiraturistica.com",
     tags: ["Ecoturismo", "Cultura Indígena", "Desierto"],
   },
+  {
+    id: "12",
+    title: "Desierto de la Tatacoa",
+    description: "Desierto rojo y gris con observatorio astronómico.",
+    image: "https://images.unsplash.com/photo-tatacoa",
+    coordinates: { lat: 3.2344, lng: -75.1645 },
+    type: "ecotourism",
+    address: "Villavieja, Huila",
+    hours: "24/7",
+    phone: "+57 8 8797042",
+    website: "https://tatacoa.com",
+    tags: ["Desierto", "Astronomía", "Naturaleza"],
+  },
+  {
+    id: "13",
+    title: "Santuario de Las Lajas",
+    description: "Basílica neogótica construida sobre un cañón.",
+    image: "https://images.unsplash.com/photo-laslajas",
+    coordinates: { lat: 0.8149, lng: -77.5847 },
+    type: "cultural",
+    address: "Ipiales, Nariño",
+    hours: "6:00 AM - 6:00 PM",
+    phone: "+57 2 7733444",
+    website: "https://santuariodelaslajas.org",
+    tags: ["Religioso", "Cultural", "Arquitectura"],
+  },
+  {
+    id: "14",
+    title: "Caño Cristales",
+    description: "El río de los cinco colores.",
+    image: "https://images.unsplash.com/photo-canocristales",
+    coordinates: { lat: 2.2666, lng: -73.7910 },
+    type: "ecotourism",
+    address: "La Macarena, Meta",
+    hours: "Tours programados",
+    phone: "+57 8 6614800",
+    website: "https://canocristales.co",
+    tags: ["Naturaleza", "Río", "Ecoturismo"],
+  },
+  {
+    id: "15",
+    title: "Providencia",
+    description: "Isla paradisíaca con el tercer arrecife de coral más grande del mundo.",
+    coordinates: { lat: 13.3487, lng: -81.3744 },
+    type: "beaches",
+    address: "Providencia, San Andrés",
+    hours: "24/7",
+    phone: "+57 8 5148925",
+    website: "https://providencia.gov.co",
+    tags: ["Playa", "Isla", "Snorkel"],
+  },
+  {
+    id: "16",
+    title: "Villa de Leyva",
+    description: "Ciudad colonial con la plaza mayor empedrada más grande de Sudamérica.",
+    coordinates: { lat: 5.6325, lng: -73.5244 },
+    type: "cultural",
+    address: "Villa de Leyva, Boyacá",
+    hours: "24/7",
+    phone: "+57 8 7320830",
+    website: "https://villadeleyva.gov.co",
+    tags: ["Colonial", "Cultural", "Historia"],
+  }
 ];
 
 const Home = () => {
@@ -241,11 +304,11 @@ const Home = () => {
               Explora destinos únicos y vive experiencias inolvidables
             </p>
             <motion.div 
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.95 }}
             >
               <Button 
-                size="lg" 
+                size="lg"
                 className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-white hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                 onClick={() => document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' })}
               >

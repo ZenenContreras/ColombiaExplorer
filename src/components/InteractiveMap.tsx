@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MapPin } from "lucide-react";
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin } from 'lucide-react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import LocationCard from "./LocationCard";
 import MapComponent from "./MapComponent";
 
@@ -9,7 +11,10 @@ interface Location {
   title: string;
   description: string;
   image: string;
-  coordinates: { x: number; y: number };
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
   type: string;
   address: string;
   hours: string;
@@ -31,7 +36,10 @@ const defaultLocations: Location[] = [
     description:
       "A UNESCO World Heritage site featuring colorful colonial architecture.",
     image: "https://images.unsplash.com/photo-1583997052103-b4a1cb974ce3",
-    coordinates: { x: 30, y: 40 },
+    coordinates: {
+      lat: 10.3932,
+      lng: -75.4832
+    },
     type: "cultural",
     address: "Centro Histórico, Cartagena",
     hours: "Open 24/7",
@@ -45,7 +53,10 @@ const defaultLocations: Location[] = [
     description:
       "Beautiful national park with pristine beaches and hiking trails.",
     image: "https://images.unsplash.com/photo-1598881034666-a8796f3797fd",
-    coordinates: { x: 70, y: 20 },
+    coordinates: {
+      lat: 11.3147,
+      lng: -74.0307
+    },
     type: "nature",
     address: "Santa Marta, Magdalena",
     hours: "6:00 AM - 5:00 PM",
@@ -64,6 +75,8 @@ const InteractiveMap = ({
     null,
   );
   const [hoveredLocation, setHoveredLocation] = useState<Location | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const markersRef = useRef<{ [key: string]: L.Marker }>({});
 
   const filteredLocations = selectedType
     ? locations.filter((location) => location.type === selectedType)
@@ -74,159 +87,152 @@ const InteractiveMap = ({
     onLocationSelect(location);
   };
 
+  useEffect(() => {
+    if (!mapRef.current) {
+      mapRef.current = L.map('map', {
+        center: [4.5709, -74.2973],
+        zoom: 6,
+        zoomControl: true,
+        attributionControl: false,
+      });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+      }).addTo(mapRef.current);
+
+      fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/COL.geo.json')
+        .then(response => response.json())
+        .then(data => {
+          L.geoJSON(data, {
+            style: {
+              color: '#2563eb',
+              weight: 2,
+              fillColor: '#60a5fa',
+              fillOpacity: 0.1,
+            },
+          }).addTo(mapRef.current!);
+        });
+    }
+
+    Object.values(markersRef.current).forEach(marker => marker.remove());
+    markersRef.current = {};
+
+    locations.forEach(location => {
+      const customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: `
+          <div class="marker-pin ${getMarkerColor(location.type)}">
+            <div class="marker-content">
+              ${location.type === 'beaches' ? '🏖️' : 
+                location.type === 'mountains' ? '⛰️' : 
+                location.type === 'cultural' ? '🏛️' : '🌿'}
+            </div>
+            <div class="pulse"></div>
+          </div>
+        `,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+      });
+
+      const marker = L.marker([location.coordinates.lat, location.coordinates.lng], {
+        icon: customIcon,
+      })
+        .addTo(mapRef.current!)
+        .on('click', () => handleLocationClick(location))
+        .on('mouseover', () => setHoveredLocation(location))
+        .on('mouseout', () => setHoveredLocation(null));
+
+      markersRef.current[location.id] = marker;
+    });
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, [locations, selectedType]);
+
   const getMarkerColor = (type: string) => {
     switch (type) {
       case 'beaches':
-        return 'bg-blue-500 shadow-blue-500/50';
+        return 'marker-blue';
       case 'mountains':
-        return 'bg-green-500 shadow-green-500/50';
+        return 'marker-green';
       case 'cultural':
-        return 'bg-red-500 shadow-red-500/50';
+        return 'marker-red';
       case 'ecotourism':
-        return 'bg-yellow-500 shadow-yellow-500/50';
+        return 'marker-yellow';
       default:
-        return 'bg-gray-500 shadow-gray-500/50';
+        return 'marker-gray';
     }
   };
 
   return (
-    <div className="relative w-full h-full bg-white rounded-xl shadow-xl overflow-hidden">
-      {/* Fondo del mapa */}
-      <div className="absolute inset-0 bg-[url('/colombia-map-bg.svg')] bg-cover bg-center opacity-20" />
+    <div className="relative w-full h-[600px] bg-white rounded-xl shadow-xl overflow-hidden">
+      <div id="map" className="absolute inset-0 z-10" />
       
-      {/* Contenedor del mapa */}
-      <div className="relative w-full h-full p-8">
-        {/* Título y leyenda */}
-        <div className="absolute top-4 left-4 z-10 bg-white/90 p-4 rounded-lg shadow-lg backdrop-blur-sm">
-          <h3 className="text-xl font-bold mb-2">Destinos en Colombia</h3>
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-blue-500" />
-              <span className="text-sm">Playas</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-green-500" />
-              <span className="text-sm">Montañas</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <span className="text-sm">Cultural</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <span className="text-sm">Ecoturismo</span>
-            </div>
+      {/* Leyenda actualizada */}
+      <div className="absolute top-4 left-4 z-20 bg-white/90 p-4 rounded-lg shadow-lg backdrop-blur-sm">
+        <h3 className="text-xl font-bold mb-2">Destinos en Colombia</h3>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 flex items-center justify-center">🏖️</div>
+            <span className="text-sm">Playas</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 flex items-center justify-center">⛰️</div>
+            <span className="text-sm">Montañas</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 flex items-center justify-center">🏛️</div>
+            <span className="text-sm">Cultural</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 flex items-center justify-center">🌿</div>
+            <span className="text-sm">Ecoturismo</span>
           </div>
         </div>
-
-        {/* Marcadores de ubicación */}
-        {filteredLocations.map((location) => (
-          <motion.div
-            key={location.id}
-            className="absolute"
-            style={{
-              left: `${location.coordinates.x}%`,
-              top: `${location.coordinates.y}%`,
-            }}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            whileHover={{ scale: 1.2 }}
-          >
-            <button
-              className="relative group"
-              onMouseEnter={() => setHoveredLocation(location)}
-              onMouseLeave={() => setHoveredLocation(null)}
-              onClick={() => handleLocationClick(location)}
-            >
-              <motion.div
-                className={`w-4 h-4 rounded-full ${getMarkerColor(location.type)} shadow-lg cursor-pointer relative`}
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              />
-              <motion.div
-                className={`w-8 h-8 rounded-full ${getMarkerColor(location.type)} absolute -top-2 -left-2 -z-10 opacity-30`}
-                animate={{
-                  scale: [1, 2],
-                  opacity: [0.3, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
-              />
-            </button>
-
-            {/* Tooltip al hacer hover */}
-            <AnimatePresence>
-              {hoveredLocation?.id === location.id && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute z-20 w-48 bg-white rounded-lg shadow-xl p-3 -translate-x-1/2 translate-y-2"
-                >
-                  <div className="flex gap-2">
-                    <img
-                      src={location.image}
-                      alt={location.title}
-                      className="w-12 h-12 rounded object-cover"
-                    />
-                    <div>
-                      <h4 className="font-semibold text-sm">{location.title}</h4>
-                      <p className="text-xs text-gray-500">{location.address}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-
-        {/* Modal de detalles */}
-        <AnimatePresence>
-          {selectedLocation && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-              onClick={() => setSelectedLocation(null)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-xl p-6 max-w-lg w-full"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img
-                  src={selectedLocation.image}
-                  alt={selectedLocation.title}
-                  className="w-full h-48 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-2xl font-bold mb-2">{selectedLocation.title}</h3>
-                <p className="text-gray-600 mb-4">{selectedLocation.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {selectedLocation.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Modal de detalles */}
+      <AnimatePresence>
+        {selectedLocation && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedLocation(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-xl p-6 max-w-lg w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedLocation.image}
+                alt={selectedLocation.title}
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <h3 className="text-2xl font-bold mb-2">{selectedLocation.title}</h3>
+              <p className="text-gray-600 mb-4">{selectedLocation.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {selectedLocation.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
