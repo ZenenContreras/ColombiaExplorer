@@ -337,11 +337,11 @@ const Home = () => {
             </p>
             <motion.div 
               whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.98 }}
             >
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-white hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
+                className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-white hover:shadow-lg transform hover:-translate-y-0.2 transition-all duration-600"
                 onClick={() => document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Comenzar Aventura
