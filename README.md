@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# Colombia Explorer 🇨🇴
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web interactiva que muestra los destinos turísticos más importantes de Colombia, permitiendo a los usuarios explorar y descubrir lugares únicos a través de un mapa interactivo.
 
-Currently, two official plugins are available:
+## Características ✨
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🗺️ Mapa interactivo con marcadores personalizados
+- 🔍 Búsqueda en tiempo real de destinos
+- 🏷️ Filtrado por categorías (Playas, Montañas, Cultura, Ecoturismo)
+- 📱 Diseño responsive
+- 🎨 Interfaz moderna y atractiva
+- 💫 Animaciones fluidas
+- 🖼️ Modal de detalles con información completa
 
-## Expanding the ESLint configuration
+## Tecnologías Utilizadas 🛠️
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React + TypeScript
+- Tailwind CSS
+- Framer Motion
+- Leaflet Maps
+- Lucide Icons
+- Shadcn/ui
 
-- Configure the top-level `parserOptions` property like this:
+## Instalación 🚀
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+
+Clonar el repositorio
+```bash
+git clone https://github.com/tu-usuario/colombia-explorer.git
+```
+Instalar dependencias
+```bash
+cd colombia-explorer
+npm install
+```
+Iniciar el servidor de desarrollo
+```bash
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Contribución 🤝
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+
+## Licencia 📄
+
+MIT
