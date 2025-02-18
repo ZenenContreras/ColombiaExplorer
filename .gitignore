@@ -25,6 +25,9 @@ dist-ssr
 
 !node_modules/.vite
 
+#secrect key
+.env
+
 **/tempobook/dynamic/
 **/tempobook/storyboards/
 
