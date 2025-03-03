@@ -472,7 +472,7 @@ const Home = () => {
 
       {/* Sección de Ecoturismo con Parallax */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/public/eco-bg.jpg')] bg-cover bg-fixed bg-center" />
+        <div className="absolute inset-0 bg-[url('/eco-bg.jpg')] bg-cover bg-fixed bg-center" />
         <div className="absolute inset-0 bg-green-900/80 backdrop-blur-sm" />
         <div className="relative container mx-auto px-4">
           <motion.div
