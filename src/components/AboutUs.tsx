@@ -53,7 +53,7 @@ const AboutUs = () => {
       >
         <div className="absolute inset-0">
           <img
-            src="/public/colombia-landscape.jpg"
+            src="/colombia-landscape.jpg"
             alt="Colombia landscape"
             className="w-full h-full object-cover"
           />

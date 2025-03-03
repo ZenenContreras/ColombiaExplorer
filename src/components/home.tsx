@@ -317,7 +317,7 @@ const Home = () => {
         animate={{ opacity: 1 }}
         className="relative h-screen"
       >
-        <div className="absolute inset-0 bg-[url('/public/colombia-hero.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/colombia-hero.jpg')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
         <motion.div 
           initial={{ y: 50, opacity: 0 }}

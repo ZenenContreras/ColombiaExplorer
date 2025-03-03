@@ -169,28 +169,28 @@ const InteractiveMap = ({
   };
 
   return (
-    <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] bg-white rounded-xl shadow-xl overflow-hidden">
-      <div id="map" className="absolute inset-0 z-10" />
+    <div className="relative w-full h-[calc(100vh-5rem)] bg-white rounded-xl overflow-hidden">
+      <div id="map" className="absolute inset-0 z-10 shadow-xl rounded-xl" />
       
       {/* Leyenda responsive */}
       <div className="absolute top-4 left-4 z-20 bg-white/90 p-2 sm:p-4 rounded-lg shadow-lg backdrop-blur-sm text-sm sm:text-base">
-        <h3 className="text-xl font-bold mb-2">Destinos en Colombia</h3>
+        <h3 className="text-lg sm:text-xl font-bold mb-2">Destinos en Colombia</h3>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 flex items-center justify-center">🏖️</div>
-            <span className="text-sm">Playas</span>
+            <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">🏖️</div>
+            <span className="text-xs sm:text-sm">Playas</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 flex items-center justify-center">⛰️</div>
-            <span className="text-sm">Montañas</span>
+            <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">⛰️</div>
+            <span className="text-xs sm:text-sm">Montañas</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 flex items-center justify-center">🏛️</div>
-            <span className="text-sm">Cultural</span>
+            <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">🏛️</div>
+            <span className="text-xs sm:text-sm">Cultural</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 flex items-center justify-center">🌿</div>
-            <span className="text-sm">Ecoturismo</span>
+            <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">🌿</div>
+            <span className="text-xs sm:text-sm">Ecoturismo</span>
           </div>
         </div>
       </div>
