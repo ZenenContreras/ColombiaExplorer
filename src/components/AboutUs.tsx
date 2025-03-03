@@ -45,11 +45,11 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50">
-      {/* Hero Section Mejorado */}
+      {/* Hero Section */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative h-[70vh] overflow-hidden"
+        className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] overflow-hidden"
       >
         <div className="absolute inset-0">
           <img
@@ -62,27 +62,28 @@ const AboutUs = () => {
         
         <div className="relative h-full container mx-auto px-4 flex flex-col items-center justify-center text-white text-center">
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200"
-            {...fadeInUp}
+            className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             Sobre Nosotros
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Descubre Colombia a través de nuestros ojos, donde cada destino
-            cuenta una historia única y cada viaje se convierte en una experiencia inolvidable
+            Descubre Colombia a través de nuestros ojos
           </motion.p>
         </div>
       </motion.div>
 
-      {/* Stats Section Mejorado */}
-      <div className="container mx-auto px-4 -mt-20 relative z-10">
+      {/* Stats Section */}
+      <div className="container mx-auto px-4 -mt-16 sm:-mt-20 relative z-10">
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -90,23 +91,23 @@ const AboutUs = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="bg-white rounded-xl shadow-xl p-6 text-center transform hover:scale-105 transition-all duration-300"
-              whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
+              className="bg-white rounded-xl shadow-xl p-4 sm:p-6 text-center transform hover:scale-105 transition-all duration-300"
+              whileHover={{ y: -5 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
             >
-              <div className="flex justify-center mb-3 text-blue-600">{stat.icon}</div>
-              <h3 className="text-3xl font-bold text-blue-900 mb-1">{stat.number}</h3>
-              <p className="text-gray-600">{stat.label}</p>
+              <div className="flex justify-center mb-2 sm:mb-3 text-blue-600">{stat.icon}</div>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-1">{stat.number}</h3>
+              <p className="text-sm sm:text-base text-gray-600">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
       </div>
 
-      {/* Historia y Misión Mejorado */}
-      <div className="container mx-auto px-4 py-24">
-        <div className="grid md:grid-cols-2 gap-8">
+      {/* Historia y Misión */}
+      <div className="container mx-auto px-4 py-16 sm:py-24">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -144,11 +145,11 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Valores Section Mejorado */}
-      <div className="bg-white py-24">
+      {/* Valores Section */}
+      <div className="bg-white py-16 sm:py-24">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-center mb-16 text-blue-900"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 text-blue-900"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -156,22 +157,22 @@ const AboutUs = () => {
             Nuestros Valores
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
+                whileHover={{ y: -5 }}
               >
-                <div className="bg-gray-50 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                <div className="bg-gray-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 sm:mb-6">
                   {value.icon}
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">{value.title}</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">{value.description}</p>
+                <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-900">{value.title}</h3>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>
