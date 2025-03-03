@@ -315,33 +315,34 @@ const Home = () => {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative h-screen"
+        className="relative h-screen w-full"
       >
-        <div className="absolute inset-0 bg-[url('/colombia-hero.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/colombia-hero.jpg')] bg-cover bg-center bg-no-repeat" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="relative container mx-auto px-4 h-full flex items-center"
+          className="relative w-full h-full flex items-center px-4 sm:px-6 lg:px-8"
         >
-          <div className="max-w-2xl text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <div className="max-w-2xl mx-auto text-white text-center sm:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
               Descubre la Magia de
               <span className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-transparent bg-clip-text">
                 {" "}Colombia
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200">
+            <p className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-gray-200">
               Explora destinos únicos y vive experiencias inolvidables
             </p>
             <motion.div 
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block"
             >
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-white hover:shadow-lg transform hover:-translate-y-0.2 transition-all duration-600"
+                className="bg-gradient-to-r from-yellow-400 via-red-500 to-blue-600 text-white hover:shadow-lg transform transition-all duration-300"
                 onClick={() => document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Comenzar Aventura
@@ -355,20 +356,30 @@ const Home = () => {
       {/* Mapa Interactivo con Animaciones */}
       <motion.div 
         id="map-section" 
-        className="relative min-h-[800px] bg-gray-50 py-16"
+        className="relative py-16 bg-gradient-to-b from-gray-50 to-white"
         initial={{ opacity: 0 }}
-        animate={{ opacity: isMapVisible ? 1 : 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <div className="container mx-auto px-4 h-full">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text"
+          >
+            Explora Colombia
+          </motion.h2>
+          
           <AnimatePresence mode="wait">
             <motion.div
-              key={selectedType || 'all'} // Cambia la key cuando cambia el filtro
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
+              key={selectedType || 'all'}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="h-[700px] rounded-xl overflow-hidden shadow-2xl"
+              className="mx-auto max-w-[1200px]"
             >
               <InteractiveMap
                 locations={filteredLocations}
@@ -377,7 +388,7 @@ const Home = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Indicador de filtro activo */}
+          {/* Indicador de filtro con animación */}
           <AnimatePresence>
             {selectedType && (
               <motion.div
@@ -386,16 +397,25 @@ const Home = () => {
                 exit={{ opacity: 0, y: 20 }}
                 className="mt-4 text-center"
               >
-                <span className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-600">
-                  Mostrando: {selectedType === 'beaches' ? 'Playas' : 
-                             selectedType === 'mountains' ? 'Montañas' : 
-                             'Sitios Culturales'}
-                  <button 
+                <span className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-600 shadow-md">
+                  <motion.span
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    Mostrando: {selectedType === 'beaches' ? 'Playas' : 
+                               selectedType === 'mountains' ? 'Montañas' : 
+                               selectedType === 'cultural' ? 'Sitios Culturales' :
+                               'Ecoturismo'}
+                  </motion.span>
+                  <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => setSelectedType(undefined)}
                     className="ml-2 hover:text-blue-800"
                   >
                     ×
-                  </button>
+                  </motion.button>
                 </span>
               </motion.div>
             )}

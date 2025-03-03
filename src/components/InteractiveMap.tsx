@@ -169,11 +169,16 @@ const InteractiveMap = ({
   };
 
   return (
-    <div className="relative w-full h-[calc(100vh-5rem)] bg-white rounded-xl overflow-hidden">
-      <div id="map" className="absolute inset-0 z-10 shadow-xl rounded-xl" />
+    <div className="relative h-[600px] bg-white rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.002]">
+      <div id="map" className="absolute inset-0 z-10 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] rounded-2xl" />
       
-      {/* Leyenda responsive */}
-      <div className="absolute top-4 left-4 z-20 bg-white/90 p-2 sm:p-4 rounded-lg shadow-lg backdrop-blur-sm text-sm sm:text-base">
+      {/* Leyenda responsive con animación */}
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        className="absolute top-4 left-4 z-20 bg-white/90 p-2 sm:p-4 rounded-lg shadow-lg backdrop-blur-sm text-sm sm:text-base"
+      >
         <h3 className="text-lg sm:text-xl font-bold mb-2">Destinos en Colombia</h3>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
@@ -193,7 +198,7 @@ const InteractiveMap = ({
             <span className="text-xs sm:text-sm">Ecoturismo</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Modal de detalles */}
       <AnimatePresence>
