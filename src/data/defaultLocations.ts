@@ -1,3 +1,18 @@
+export interface LocalBusiness {
+  id: string;
+  name: string;
+  type: string;
+  rating: number;
+  distance: number;
+  description: string;
+  image: string;
+  hours: string;
+  reviewsUrl?: string;
+  acceptsReservations?: boolean;
+  acceptsDigitalPayments?: boolean;
+  badges?: string[];
+}
+
 export interface Location {
   id: string;
   title: string;
@@ -10,6 +25,7 @@ export interface Location {
   type: string;
   address: string;
   tags: string[];
+  businesses?: LocalBusiness[];
 }
 
 export const defaultLocations: Location[] = [
@@ -24,7 +40,79 @@ export const defaultLocations: Location[] = [
     },
     type: "cultural",
     address: "Cartagena, Bolívar",
-    tags: ["Cultural", "Playas", "Historia"]
+    tags: ["Cultural", "Playas", "Historia"],
+    businesses: [
+      {
+        id: "r1",
+        name: "Restaurante Sabor Caribeño",
+        type: "comida",
+        rating: 4.7,
+        distance: 350,
+        description: "Comida típica costeña, pescados y mariscos frescos.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+        hours: "10:00-22:00",
+        reviewsUrl: "https://goo.gl/maps/xxxx",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales", "Pet Friendly"],
+      },
+      {
+        id: "h1",
+        name: "Hotel Paraíso Azul",
+        type: "alojamiento",
+        rating: 4.5,
+        distance: 600,
+        description: "Hotel frente al mar con piscina y desayuno incluido.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/yyyy",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento", "Ideal para niños"],
+      },
+      {
+        id: "c1",
+        name: "Café Colonial",
+        type: "comida",
+        rating: 4.3,
+        distance: 120,
+        description: "Cafetería con repostería artesanal y café colombiano.",
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+        hours: "8:00-20:00",
+        reviewsUrl: "https://goo.gl/maps/zzzz",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Pet Friendly"],
+      },
+      {
+        id: "g1",
+        name: "Guía Turístico Juan",
+        type: "guia",
+        rating: 4.9,
+        distance: 80,
+        description: "Recorridos históricos y culturales personalizados.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
+        hours: "9:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/aaaa",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"],
+      },
+      {
+        id: "s1",
+        name: "Tienda Artesanías Sol",
+        type: "tienda",
+        rating: 4.2,
+        distance: 200,
+        description: "Souvenirs, mochilas y artesanías locales.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80",
+        hours: "9:00-21:00",
+        reviewsUrl: "https://goo.gl/maps/bbbb",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Ideal para niños"],
+      },
+    ]
   },
   {
     id: "tayrona",
@@ -37,7 +125,65 @@ export const defaultLocations: Location[] = [
     },
     type: "beaches",
     address: "Santa Marta, Magdalena",
-    tags: ["Playas", "Naturaleza", "Ecoturismo"]
+    tags: ["Playas", "Naturaleza", "Ecoturismo"],
+    businesses: [
+      {
+        id: "r2",
+        name: "Restaurante Playa Brisa",
+        type: "comida",
+        rating: 4.6,
+        distance: 200,
+        description: "Pescados frescos y jugos naturales frente al mar.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=81",
+        hours: "9:00-20:00",
+        reviewsUrl: "https://goo.gl/maps/tayrona1",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "h2",
+        name: "EcoHotel Tayrona",
+        type: "alojamiento",
+        rating: 4.4,
+        distance: 500,
+        description: "Cabañas ecológicas con vista al mar y desayuno incluido.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=81",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/tayrona2",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento"]
+      },
+      {
+        id: "g2",
+        name: "Guía Marta",
+        type: "guia",
+        rating: 4.8,
+        distance: 100,
+        description: "Tours ecológicos y avistamiento de fauna.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=81",
+        hours: "8:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/tayrona3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s2",
+        name: "Tienda Naturaleza Viva",
+        type: "tienda",
+        rating: 4.1,
+        distance: 150,
+        description: "Artesanías y recuerdos ecológicos.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=81",
+        hours: "10:00-19:00",
+        reviewsUrl: "https://goo.gl/maps/tayrona4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Pet Friendly"]
+      }
+    ]
   },
   {
     id: "cocora",
@@ -50,7 +196,65 @@ export const defaultLocations: Location[] = [
     },
     type: "mountains",
     address: "Salento, Quindío",
-    tags: ["Montañas", "Naturaleza"]
+    tags: ["Montañas", "Naturaleza"],
+    businesses: [
+      {
+        id: "r3",
+        name: "Trucha y Café Cocora",
+        type: "comida",
+        rating: 4.7,
+        distance: 180,
+        description: "Especialidad en trucha y café de origen local.",
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=81",
+        hours: "8:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/cocora1",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Pet Friendly"]
+      },
+      {
+        id: "h3",
+        name: "Hostal Palmas de Cera",
+        type: "alojamiento",
+        rating: 4.5,
+        distance: 400,
+        description: "Hospedaje rural con desayuno y tours guiados.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=82",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/cocora2",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento"]
+      },
+      {
+        id: "g3",
+        name: "Guía Andrés",
+        type: "guia",
+        rating: 4.9,
+        distance: 90,
+        description: "Caminatas ecológicas y avistamiento de aves.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=82",
+        hours: "7:00-17:00",
+        reviewsUrl: "https://goo.gl/maps/cocora3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s3",
+        name: "Tienda Artesanal Cocora",
+        type: "tienda",
+        rating: 4.3,
+        distance: 120,
+        description: "Souvenirs y productos hechos a mano.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=82",
+        hours: "9:00-19:00",
+        reviewsUrl: "https://goo.gl/maps/cocora4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Ideal para niños"]
+      }
+    ]
   },
   {
     id: "sanandres",
@@ -63,7 +267,65 @@ export const defaultLocations: Location[] = [
     },
     type: "beaches",
     address: "San Andrés Isla",
-    tags: ["Playas", "Isla"]
+    tags: ["Playas", "Isla"],
+    businesses: [
+      {
+        id: "r4",
+        name: "Restaurante Mar Azul",
+        type: "comida",
+        rating: 4.8,
+        distance: 220,
+        description: "Cocina caribeña y cocteles tropicales.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=82",
+        hours: "11:00-23:00",
+        reviewsUrl: "https://goo.gl/maps/sanandres1",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "h4",
+        name: "Hotel Coral View",
+        type: "alojamiento",
+        rating: 4.6,
+        distance: 350,
+        description: "Hotel con piscina y acceso directo a la playa.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=83",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/sanandres2",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento"]
+      },
+      {
+        id: "g4",
+        name: "Guía Raúl",
+        type: "guia",
+        rating: 4.7,
+        distance: 110,
+        description: "Snorkel y recorridos en lancha por el arrecife.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=83",
+        hours: "8:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/sanandres3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s4",
+        name: "Tienda Coralina",
+        type: "tienda",
+        rating: 4.2,
+        distance: 140,
+        description: "Artesanías isleñas y accesorios playeros.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=83",
+        hours: "10:00-21:00",
+        reviewsUrl: "https://goo.gl/maps/sanandres4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Pet Friendly"]
+      }
+    ]
   },
   {
     id: "guatape",
@@ -102,7 +364,65 @@ export const defaultLocations: Location[] = [
     },
     type: "cultural",
     address: "Bogotá, Cundinamarca",
-    tags: ["Cultural", "Religioso", "Montaña"]
+    tags: ["Cultural", "Religioso", "Montaña"],
+    businesses: [
+      {
+        id: "r5",
+        name: "Restaurante Santa Clara",
+        type: "comida",
+        rating: 4.7,
+        distance: 120,
+        description: "Comida típica bogotana y vista panorámica de la ciudad.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=84",
+        hours: "10:00-20:00",
+        reviewsUrl: "https://goo.gl/maps/monserrate1",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "c5",
+        name: "Café Mirador",
+        type: "comida",
+        rating: 4.5,
+        distance: 80,
+        description: "Café colombiano y postres artesanales con vista a Bogotá.",
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=84",
+        hours: "8:00-19:00",
+        reviewsUrl: "https://goo.gl/maps/monserrate2",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Pet Friendly"]
+      },
+      {
+        id: "g5",
+        name: "Guía Camilo",
+        type: "guia",
+        rating: 4.9,
+        distance: 60,
+        description: "Recorridos históricos y senderismo guiado en Monserrate.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=84",
+        hours: "7:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/monserrate3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s5",
+        name: "Tienda Recuerdos Monserrate",
+        type: "tienda",
+        rating: 4.3,
+        distance: 90,
+        description: "Souvenirs religiosos y artesanías bogotanas.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=84",
+        hours: "9:00-19:00",
+        reviewsUrl: "https://goo.gl/maps/monserrate4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Ideal para niños"]
+      }
+    ]
   },
   {
     id: "ciudadperdida",
