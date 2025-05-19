@@ -338,7 +338,65 @@ export const defaultLocations: Location[] = [
     },
     type: "cultural",
     address: "Guatapé, Antioquia",
-    tags: ["Cultural", "Naturaleza"]
+    tags: ["Cultural", "Naturaleza"],
+    businesses: [
+      {
+        id: "r-gtp",
+        name: "Restaurante El Peñol",
+        type: "comida",
+        rating: 4.6,
+        distance: 180,
+        description: "Comida paisa y vista al embalse.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+        hours: "10:00-22:00",
+        reviewsUrl: "https://goo.gl/maps/guatape1",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "h-gtp",
+        name: "Hotel Zócalos",
+        type: "alojamiento",
+        rating: 4.5,
+        distance: 400,
+        description: "Hotel boutique en el centro colorido.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/guatape2",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento"]
+      },
+      {
+        id: "g-gtp",
+        name: "Guía Ana",
+        type: "guia",
+        rating: 4.9,
+        distance: 90,
+        description: "Recorridos en lancha y senderismo.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=82",
+        hours: "8:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/guatape3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s-gtp",
+        name: "Tienda Artesanal Zócalos",
+        type: "tienda",
+        rating: 4.3,
+        distance: 120,
+        description: "Souvenirs y productos hechos a mano.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=82",
+        hours: "9:00-19:00",
+        reviewsUrl: "https://goo.gl/maps/guatape4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Ideal para niños"]
+      }
+    ]
   },
   {
     id: "amazonas",
