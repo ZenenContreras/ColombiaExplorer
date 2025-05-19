@@ -212,7 +212,7 @@ const InteractiveMap = ({
   };
 
   return (
-    <div className="relative h-[750px] sm:h-[75vh] bg-white rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.002]">
+    <div className="relative h-[750px] sm:h-[80vh] bg-white rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.002]">
       {/* NUEVO: Botón de geolocalización */}
       <button
         className="absolute bottom-6 right-6 z-30 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition-all flex items-center gap-2"
