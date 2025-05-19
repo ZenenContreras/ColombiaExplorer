@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -22,12 +22,42 @@ const NavigationBar = ({
   onSearch = () => {},
   onFilterChange = () => {},
 }: NavigationBarProps) => {
-  const [searchValue, setSearchValue] = React.useState("");
-  const [showPreview, setShowPreview] = React.useState(false);
-  const [searchResults, setSearchResults] = React.useState<typeof defaultLocations>([]);
-  const searchRef = React.useRef<HTMLDivElement>(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [showPreview, setShowPreview] = useState(false);
+  const [searchResults, setSearchResults] = useState<typeof defaultLocations>([]);
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
   const [showMobileSearch, setShowMobileSearch] = React.useState(false);
+
+  useEffect(() => {
+    if (searchValue.length > 0) {
+      const term = searchValue.toLowerCase();
+      setSearchResults(
+        defaultLocations.filter(location =>
+          location.title.toLowerCase().includes(term) ||
+          location.type.toLowerCase().includes(term) ||
+          location.address.toLowerCase().includes(term) ||
+          (location.tags && location.tags.some(tag => tag.toLowerCase().includes(term)))
+        )
+      );
+      setShowAutocomplete(true);
+    } else {
+      setSearchResults([]);
+      setShowAutocomplete(false);
+    }
+  }, [searchValue]);
+
+  // NUEVO: Selección de sugerencia
+  const handleSelectSuggestion = (loc: typeof defaultLocations[0]) => {
+    setShowAutocomplete(false);
+    setSearchValue("");
+    // Navegar a la sección del mapa y emitir evento global para abrir el destino
+    window.location.hash = '#map-section';
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('openMapLocation', { detail: loc.id }));
+    }, 400);
+  };
 
   // Cerrar la previsualización cuando se hace clic fuera
   React.useEffect(() => {
@@ -140,14 +170,37 @@ const NavigationBar = ({
           </div>
 
           <div className="flex-1 flex justify-end items-center gap-2 sm:gap-4">
-            <div className="relative hidden sm:block">
+            <div className="relative hidden sm:block" ref={searchRef}>
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 className="pl-8 w-full max-w-[200px] md:max-w-[300px] lg:max-w-[400px] transition-all"
                 placeholder="Buscar destinos..."
                 value={searchValue}
-                onChange={handleSearchChange}
+                onChange={e => setSearchValue(e.target.value)}
+                onFocus={() => searchValue && setShowAutocomplete(true)}
               />
+              {/* Card de autocompletado visual */}
+              {showAutocomplete && searchResults.length > 0 && (
+                <div className="absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-lg border border-blue-100 overflow-hidden max-h-72 overflow-y-auto z-50">
+                  {searchResults.slice(0, 6).map((loc) => (
+                    <button
+                      key={loc.id}
+                      className="flex items-center w-full gap-3 px-4 py-3 hover:bg-blue-50 transition-all text-left"
+                      onClick={() => handleSelectSuggestion(loc)}
+                    >
+                      <img src={loc.image} alt={loc.title} className="w-10 h-10 object-cover rounded-md" />
+                      <div className="flex-1">
+                        <div className="font-semibold text-blue-700 text-sm line-clamp-1">{loc.title}</div>
+                        <div className="text-xs text-gray-500 line-clamp-1">{loc.address}</div>
+                        <div className="text-xs text-gray-400">{loc.type.charAt(0).toUpperCase() + loc.type.slice(1)}</div>
+                      </div>
+                    </button>
+                  ))}
+                  {searchResults.length > 6 && (
+                    <div className="text-xs text-gray-400 px-4 py-2">Y más resultados...</div>
+                  )}
+                </div>
+              )}
             </div>
             <Button
               variant="ghost"
