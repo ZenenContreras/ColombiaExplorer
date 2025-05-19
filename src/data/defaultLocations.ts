@@ -33,7 +33,7 @@ export const defaultLocations: Location[] = [
     id: "cartagena",
     title: "Cartagena",
     description: "Ciudad histórica con arquitectura colonial",
-    image: "/images/cartagena.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 10.3932,
       lng: -75.4832
@@ -63,7 +63,7 @@ export const defaultLocations: Location[] = [
         rating: 4.5,
         distance: 600,
         description: "Hotel frente al mar con piscina y desayuno incluido.",
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
         hours: "24/7",
         reviewsUrl: "https://goo.gl/maps/yyyy",
         acceptsReservations: true,
@@ -118,7 +118,7 @@ export const defaultLocations: Location[] = [
     id: "tayrona",
     title: "Parque Tayrona",
     description: "Parque nacional con playas vírgenes",
-    image: "/images/tayrona.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 11.3147,
       lng: -74.0307
@@ -148,7 +148,7 @@ export const defaultLocations: Location[] = [
         rating: 4.4,
         distance: 500,
         description: "Cabañas ecológicas con vista al mar y desayuno incluido.",
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=81",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
         hours: "24/7",
         reviewsUrl: "https://goo.gl/maps/tayrona2",
         acceptsReservations: true,
@@ -189,7 +189,7 @@ export const defaultLocations: Location[] = [
     id: "cocora",
     title: "Valle del Cocora",
     description: "Valle con las palmeras de cera más altas del mundo",
-    image: "/images/cocora.jpg",
+    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 4.6381,
       lng: -75.4870
@@ -219,7 +219,7 @@ export const defaultLocations: Location[] = [
         rating: 4.5,
         distance: 400,
         description: "Hospedaje rural con desayuno y tours guiados.",
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=82",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
         hours: "24/7",
         reviewsUrl: "https://goo.gl/maps/cocora2",
         acceptsReservations: true,
@@ -260,7 +260,7 @@ export const defaultLocations: Location[] = [
     id: "sanandres",
     title: "San Andrés",
     description: "Isla paradisíaca en el Caribe",
-    image: "/images/sanandres.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 12.5847,
       lng: -81.7006
@@ -290,7 +290,7 @@ export const defaultLocations: Location[] = [
         rating: 4.6,
         distance: 350,
         description: "Hotel con piscina y acceso directo a la playa.",
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=83",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
         hours: "24/7",
         reviewsUrl: "https://goo.gl/maps/sanandres2",
         acceptsReservations: true,
@@ -331,7 +331,7 @@ export const defaultLocations: Location[] = [
     id: "guatape",
     title: "Guatapé",
     description: "Pueblo colorido con el Peñol",
-    image: "/images/guatape.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 6.2342,
       lng: -75.1574
@@ -344,7 +344,7 @@ export const defaultLocations: Location[] = [
     id: "amazonas",
     title: "Amazonas",
     description: "Selva amazónica colombiana",
-    image: "/images/amazonas.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: -4.2,
       lng: -69.9513
@@ -357,7 +357,7 @@ export const defaultLocations: Location[] = [
     id: "monserrate",
     title: "Monserrate",
     description: "Santuario religioso con vista panorámica de Bogotá",
-    image: "/images/monserrate.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 4.6058,
       lng: -74.0556
@@ -428,7 +428,7 @@ export const defaultLocations: Location[] = [
     id: "ciudadperdida",
     title: "Ciudad Perdida",
     description: "Antigua ciudad indígena en la Sierra Nevada",
-    image: "/images/ciudadperdida.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 11.0384,
       lng: -73.9267
@@ -441,7 +441,7 @@ export const defaultLocations: Location[] = [
     id: "providencia",
     title: "Providencia",
     description: "Isla paradisíaca con el tercer arrecife de coral más grande",
-    image: "/images/providencia.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 13.3489,
       lng: -81.3745
@@ -454,7 +454,7 @@ export const defaultLocations: Location[] = [
     id: "canocristales",
     title: "Caño Cristales",
     description: "El río de los cinco colores",
-    image: "/images/canocristales.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 2.2666,
       lng: -73.7910
@@ -467,7 +467,7 @@ export const defaultLocations: Location[] = [
     id: "tatacoa",
     title: "Desierto de la Tatacoa",
     description: "Desierto rojo y gris con observatorio astronómico",
-    image: "/images/tatacoa.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 3.2344,
       lng: -75.1645
@@ -480,7 +480,7 @@ export const defaultLocations: Location[] = [
     id: "sanagustin",
     title: "Parque Arqueológico San Agustín",
     description: "Mayor conjunto de monumentos religiosos megalíticos",
-    image: "/images/sanagustin.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 1.8879,
       lng: -76.2756
@@ -493,7 +493,7 @@ export const defaultLocations: Location[] = [
     id: "nevados",
     title: "Parque Los Nevados",
     description: "Parque nacional con glaciares y volcanes",
-    image: "/images/nevados.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 4.8828,
       lng: -75.3333
@@ -506,7 +506,7 @@ export const defaultLocations: Location[] = [
     id: "guajira",
     title: "Cabo de la Vela",
     description: "Desierto costero con cultura Wayúu",
-    image: "/images/guajira.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 12.2188,
       lng: -71.9987
@@ -519,7 +519,7 @@ export const defaultLocations: Location[] = [
     id: "mompox",
     title: "Mompox",
     description: "Ciudad colonial junto al río Magdalena",
-    image: "/images/mompox.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 9.2422,
       lng: -74.4258
@@ -532,7 +532,7 @@ export const defaultLocations: Location[] = [
     id: "chicamocha",
     title: "Cañón del Chicamocha",
     description: "Impresionante cañón con teleférico",
-    image: "/images/chicamocha.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 6.8472,
       lng: -72.9889
@@ -545,7 +545,7 @@ export const defaultLocations: Location[] = [
     id: "rosario",
     title: "Islas del Rosario",
     description: "Archipiélago coralino con aguas cristalinas",
-    image: "/images/rosario.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 10.1811,
       lng: -75.7972
@@ -558,7 +558,7 @@ export const defaultLocations: Location[] = [
     id: "villadeleyva",
     title: "Villa de Leyva",
     description: "Pueblo colonial con la plaza más grande de Colombia",
-    image: "/images/villadeleyva.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 5.6325,
       lng: -73.5244
@@ -571,7 +571,7 @@ export const defaultLocations: Location[] = [
     id: "chingaza",
     title: "Parque Chingaza",
     description: "Páramo con lagos y fauna única",
-    image: "/images/chingaza.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 4.5283,
       lng: -73.7458
@@ -584,7 +584,7 @@ export const defaultLocations: Location[] = [
     id: "santuariolajas",
     title: "Santuario Las Lajas",
     description: "Basílica neogótica construida sobre un cañón",
-    image: "/images/lajas.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 0.8149,
       lng: -77.5847
@@ -597,7 +597,7 @@ export const defaultLocations: Location[] = [
     id: "palomino",
     title: "Palomino",
     description: "Playa paradisíaca con río y montaña",
-    image: "/images/palomino.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 11.2033,
       lng: -73.5666
@@ -610,7 +610,7 @@ export const defaultLocations: Location[] = [
     id: "cocuy",
     title: "Sierra Nevada del Cocuy",
     description: "Cordillera con glaciares y lagunas",
-    image: "/images/cocuy.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 6.4114,
       lng: -72.3333
@@ -623,7 +623,7 @@ export const defaultLocations: Location[] = [
     id: "barichara",
     title: "Barichara",
     description: "El pueblo más lindo de Colombia",
-    image: "/images/barichara.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 6.6333,
       lng: -73.2333
@@ -636,7 +636,7 @@ export const defaultLocations: Location[] = [
     id: "gorgona",
     title: "Isla Gorgona",
     description: "Isla prístina con rica biodiversidad",
-    image: "/images/gorgona.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 2.9666,
       lng: -78.1833
@@ -649,7 +649,7 @@ export const defaultLocations: Location[] = [
     id: "puracevolcan",
     title: "Volcán Puracé",
     description: "Volcán activo en el Macizo Colombiano",
-    image: "/images/purace.jpg",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
     coordinates: {
       lat: 2.3166,
       lng: -76.3833
