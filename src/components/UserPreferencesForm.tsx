@@ -94,7 +94,7 @@ export default function UserPreferencesForm({ open, onClose }: { open: boolean; 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="w-full max-w-full sm:max-w-lg bg-white rounded-2xl shadow-2xl p-4 sm:p-8 flex flex-col gap-6 overflow-y-auto max-h-[95vh] relative"
+            className="w-full max-w-full sm:max-w-4xl md:max-w-4xl bg-white rounded-2xl shadow-2xl p-4 sm:p-8 md:p-12 flex flex-col gap-6 overflow-y-auto max-h-[95vh] relative"
             style={{ boxSizing: 'border-box' }}
           >
             <h2 className="text-xl sm:text-3xl font-bold text-blue-800 text-center mb-2">Tus preferencias de viaje</h2>
