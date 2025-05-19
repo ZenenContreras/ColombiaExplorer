@@ -91,16 +91,6 @@ const LocalBusinessList: React.FC<LocalBusinessListProps> = ({ businesses, isPre
           disabled={filtered.length <= page * pageSize}
         >Siguiente</button>
       </div>
-      {isPremium && (
-        <div className="mt-6">
-          <h4 className="font-bold text-blue-700 mb-2">Recomendados por locales y descuentos exclusivos</h4>
-          <div className="flex flex-col gap-2">
-            {filtered.filter(b => b.badges?.includes("Recomendado por locales") || b.badges?.includes("Descuento")).map(business => (
-              <LocalBusinessCard key={business.id + "-premium"} {...business} />
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -350,7 +350,7 @@ const InteractiveMap = ({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-t-2xl sm:rounded-xl p-2 sm:p-6 w-full max-w-full sm:max-w-lg relative shadow-xl mx-0 sm:mx-auto overflow-y-auto max-h-[90vh] sm:max-h-[80vh]"
+              className="bg-white rounded-t-2xl sm:rounded-xl p-2 sm:p-8 w-full max-w-full sm:max-w-2xl relative shadow-xl mx-0 sm:mx-auto overflow-y-auto max-h-[95vh] h-[90vh] flex flex-col"
               style={{
                 boxSizing: 'border-box',
                 margin: 0,
@@ -367,7 +367,7 @@ const InteractiveMap = ({
                 <img
                   src={selectedLocation.image}
                   alt={selectedLocation.title}
-                  className="w-full h-40 sm:h-48 object-cover rounded-xl border border-gray-100 shadow-sm"
+                  className="w-full h-56 sm:h-80 object-cover rounded-xl border border-gray-100 shadow-sm mb-4"
                 />
                 {/* Simulación de galería si hay más imágenes en el futuro */}
                 {/* <div className="flex gap-2 mt-2 overflow-x-auto">
@@ -387,7 +387,7 @@ const InteractiveMap = ({
                   </span>
                 ))}
               </div>
-              <p className="text-gray-700 mb-4 text-sm sm:text-base leading-relaxed">{selectedLocation.description}</p>
+              <p className="text-gray-700 mb-4 text-base sm:text-lg leading-relaxed">{selectedLocation.description}</p>
               <div className="mb-2 text-xs sm:text-sm text-gray-600">
                 <strong>Ubicación:</strong> {selectedLocation.address}
               </div>
