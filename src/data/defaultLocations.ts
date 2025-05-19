@@ -1327,5 +1327,141 @@ export const defaultLocations: Location[] = [
         badges: ["Pet Friendly"]
       }
     ]
+  },
+  {
+    id: "cali",
+    title: "Cali",
+    description: "Capital de la salsa y ciudad vibrante del Valle del Cauca.",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=90",
+    coordinates: { lat: 3.4516, lng: -76.5320 },
+    type: "cultural",
+    address: "Cali, Valle del Cauca",
+    tags: ["Cultural", "Salsa", "Ciudad"],
+    businesses: [
+      {
+        id: "r-cali-1",
+        name: "Restaurante Ringlete",
+        type: "comida",
+        rating: 4.8,
+        distance: 220,
+        description: "Comida vallecaucana y ambiente tradicional.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=90",
+        hours: "12:00-23:00",
+        reviewsUrl: "https://goo.gl/maps/cali1",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "h-cali-1",
+        name: "Hotel Intercontinental Cali",
+        type: "alojamiento",
+        rating: 4.7,
+        distance: 400,
+        description: "Hotel de lujo con piscina y vista al río Cali.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=90",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/cali2",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento"]
+      },
+      {
+        id: "g-cali-1",
+        name: "Guía Salsa Tour",
+        type: "guia",
+        rating: 4.9,
+        distance: 100,
+        description: "Clases y recorridos de salsa caleña.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=90",
+        hours: "10:00-22:00",
+        reviewsUrl: "https://goo.gl/maps/cali3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s-cali-1",
+        name: "Tienda Artesanías del Valle",
+        type: "tienda",
+        rating: 4.3,
+        distance: 150,
+        description: "Artesanías y productos típicos del Valle del Cauca.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=90",
+        hours: "10:00-20:00",
+        reviewsUrl: "https://goo.gl/maps/cali4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Pet Friendly"]
+      }
+    ]
+  },
+  {
+    id: "sincelejo",
+    title: "Sincelejo",
+    description: "Capital de Sucre, famosa por sus fiestas y cultura sabanera.",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=91",
+    coordinates: { lat: 9.3047, lng: -75.3978 },
+    type: "cultural",
+    address: "Sincelejo, Sucre",
+    tags: ["Cultural", "Fiesta", "Sabanas"],
+    businesses: [
+      {
+        id: "r-since-1",
+        name: "Restaurante Sabanero",
+        type: "comida",
+        rating: 4.6,
+        distance: 180,
+        description: "Comida típica sabanera y ambiente familiar.",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=91",
+        hours: "11:00-22:00",
+        reviewsUrl: "https://goo.gl/maps/since1",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "h-since-1",
+        name: "Hotel Malibú",
+        type: "alojamiento",
+        rating: 4.4,
+        distance: 350,
+        description: "Hotel moderno con piscina y restaurante.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=91",
+        hours: "24/7",
+        reviewsUrl: "https://goo.gl/maps/since2",
+        acceptsReservations: true,
+        acceptsDigitalPayments: true,
+        badges: ["Descuento"]
+      },
+      {
+        id: "g-since-1",
+        name: "Guía Sabanas",
+        type: "guia",
+        rating: 4.8,
+        distance: 90,
+        description: "Recorridos culturales y musicales por Sincelejo.",
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=91",
+        hours: "8:00-18:00",
+        reviewsUrl: "https://goo.gl/maps/since3",
+        acceptsReservations: true,
+        acceptsDigitalPayments: false,
+        badges: ["Recomendado por locales"]
+      },
+      {
+        id: "s-since-1",
+        name: "Tienda Artesanías Sucre",
+        type: "tienda",
+        rating: 4.2,
+        distance: 120,
+        description: "Artesanías y productos típicos de Sucre.",
+        image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=91",
+        hours: "10:00-20:00",
+        reviewsUrl: "https://goo.gl/maps/since4",
+        acceptsReservations: false,
+        acceptsDigitalPayments: true,
+        badges: ["Ideal para niños"]
+      }
+    ]
   }
 ]; 
