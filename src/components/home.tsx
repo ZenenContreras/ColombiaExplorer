@@ -14,6 +14,7 @@ import InteractiveMap from "./InteractiveMap";
 import NavigationBar from "./NavigationBar";
 import { Button } from "./ui/button";
 import { defaultLocations } from "../data/defaultLocations";
+import { usePreferences } from "../lib/PreferencesContext";
 
 interface Location {
   id: string;
@@ -33,6 +34,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState<string | undefined>();
   const [isMapVisible, setIsMapVisible] = useState(false);
+  const { preferences } = usePreferences();
 
   useEffect(() => {
     // Verificar si hay un filtro pendiente
@@ -81,7 +83,7 @@ const Home = () => {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesType = selectedType ? location.type === selectedType : true;
-    return matchesSearch && matchesType;
+    return matchesSearch && matchesType && (!preferences.experiences.length || preferences.experiences.includes(location.type));
   });
 
   return (
